@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% macro section(sectionClass='section', wrapperClass=None) %}
+  <section class="{{ sectionClass }}">
+    {% if wrapperClass %}
+      <div class="{{ wrapperClass }}">
+    {% endif %}
+    <div class="container">
+      <div class="columns">
+        <div class="column is-8-desktop is-offset-2-desktop">
+          {{ caller() }}
+        </div>
+        <!-- /.column is-8-desktop is-offset-2-desktop -->
+      </div>
+      <!-- /.columns -->
+    </div>
+    <!-- /.container -->
+    {% if wrapperClass %}
+      </div>
+    {% endif %}
+  </section>
+  <!-- /.section -->
+{% endmacro %}
+
+{% block body %}
+
+  {% call section('hero is-medium is-primary', 'hero-body') %}
+    <h1 class="title is-2 is-spaced">
+      Counter App
+    </h1>
+    <h2 class="subtitle is-4">
+      The current count is: <span id="count"></span>
+    </h2>
+  {% endcall %}
+
+  {% call section() %}
+    <div class="field">
+      <label for="amount" class="label">Amount</label>
+      <!-- /.label -->
+      <div class="control">
+        <input type="text" class="input"
+               id="amount" name="amount"
+               value="1" step="1" min="1">
+        <!-- /#amount.input -->
+      </div>
+      <!-- /.control -->
+    </div>
+    <!-- /.field -->
+    <div class="field is-grouped">
+      <p class="control">
+        <button class="button is-success" id="increment" onclick="handleClick('POST')">
+          Increment
+        </button>
+        <!-- /#increment.button is-success -->
+      </p>
+      <!-- /.control -->
+      <p class="control">
+        <button class="button is-danger" id="decrement" onclick="handleClick('DELETE')">
+          Decrement
+        </button>
+        <!-- /#decrement.button is-danger -->
+      </p>
+      <!-- /.control -->
+    </div>
+    <!-- /.field is-grouped -->
+  {% endcall %}
+
+  {% call section() %}
+    <div class="content">
+      <h1>Documentation</h1>
+      <ul>
+        <li>
+          <a href="/docs">Openapi Docs</a>
+        </li>
+        <li>
+          <a href="/redoc">Recoc Docs</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /.content -->
+  {% endcall %}
+
+{% endblock %}
+
+{% block scripts %}
+  <script src="{{ url_for('static', path='/main.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,17 @@
+services:
+  app:
+    build:
+      context: .
+    depends_on:
+      - redis
+    environment:
+      REDIS_URL: "redis://redis:6379/0"
+      PORT: "8000"
+      MODULE_NAME: counter
+      VARIABLE_NAME: "create_app()"
+    ports:
+      - 8000:8000
+  redis:
+    image: redis:latest
+    ports:
+      - 6379:6379

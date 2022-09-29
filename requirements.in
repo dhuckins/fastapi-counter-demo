@@ -1,0 +1,6 @@
+fastapi
+pydantic
+uvicorn[standard]
+redis[hiredis]
+gunicorn
+jinja2
